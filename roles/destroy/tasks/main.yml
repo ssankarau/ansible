@@ -1,12 +1,18 @@
 ---
 - name: Destroy RDS
   import_tasks: rds.yml
+- pause:
+    seconds: 10
 
-# - name: Destroy Ec2 Instances
-#   import_tasks: ec2.yml
+- name: Destroy Ec2 Instances
+  import_tasks: ec2.yml
+- pause:
+    seconds: 10
 
 - name: Destroy ALB
   import_tasks: alb.yml
+- pause:
+    seconds: 10
 
 - name: Destroy VPC
   import_tasks: vpc.yml

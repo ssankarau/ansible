@@ -1,6 +1,4 @@
 ---
-# - name: Create Web ALB Target Groups
-#   import_tasks: web-alb-target-group.yml
 
 - name: copy private key to the bastion host
   copy:

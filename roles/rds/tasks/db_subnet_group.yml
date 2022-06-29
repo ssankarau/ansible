@@ -3,6 +3,8 @@
     state: present
     name: ansible-{{ deploy_environment }}-db-subnet-group
     description: Associate subent as DB Subnet Group
+    region: "{{ region }}"
+    
     subnets:
       - "{{ db_subnet_1.subnet.id }}"
       - "{{ db_subnet_2.subnet.id }}"

@@ -2,4 +2,5 @@
   community.aws.rds_instance:
     id: "ansible-{{ deploy_environment }}-db"
     state: absent
+    region: "{{ region }}"
     skip_final_snapshot: True

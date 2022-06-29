@@ -8,6 +8,8 @@
     network:
       assign_public_ip: true
     image_id: "{{ bastion_ami }}"
+    region: "{{ region }}"
+    state: "running"
     tags:
       Environment: "{{ deploy_environment }}"
       Group: Bastion

@@ -6,6 +6,7 @@
     subnets:
       - "{{ web_subnet_1.subnet.id }}"
       - "{{ web_subnet_2.subnet.id }}"
+    region: "{{ region }}"
     scheme: internal
     listeners:
       - Protocol: HTTP

@@ -4,6 +4,7 @@
     protocol: http
     port: 80
     vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ region }}"
     targets:
       - Id: "{{ app_instance_1.instances[0].instance_id }}"
         Port: 80

@@ -6,6 +6,7 @@
     instance_type: "{{ web_instance_type }}"
     security_group: "{{ web_sg.group_id }}"
     image_id: "{{ web_ami }}"
+    region: "{{ region }}"
     state: running
     tags:
       Environment: "{{ deploy_environment }}"
@@ -21,6 +22,7 @@
     instance_type: "{{ web_instance_type }}"
     security_group: "{{ web_sg.group_id }}"
     image_id: "{{ web_ami }}"
+    region: "{{ region }}"
     state: running
     tags:
       Environment: "{{ deploy_environment }}"

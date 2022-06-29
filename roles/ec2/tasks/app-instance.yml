@@ -6,6 +6,7 @@
     key_name: "{{ deploy_environment }}-private-key"
     security_group: "{{ app_sg.group_id }}"
     image_id: "{{ app_ami }}"
+    region: "{{ region }}"
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"
     tags:
@@ -21,6 +22,7 @@
     instance_type: "{{ app_instance_type }}"
     security_group: "{{ app_sg.group_id }}"
     image_id: "{{ app_ami }}"
+    region: "{{ region }}"
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"
     tags:

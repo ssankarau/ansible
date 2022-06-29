@@ -1,23 +1,27 @@
+# Remove an App ALB
+- community.aws.elb_application_lb:
+    name: "ansible-{{ deploy_environment }}-app-elb"
+    state: absent
+    region: "{{ region }}"
+
 # Remove an Web ALB
 - community.aws.elb_application_lb:
-    name: "{{ web_alb.load_balancer_name }}"
+    name: "ansible-{{ deploy_environment }}-web-elb"
     state: absent
+    region: "{{ region }}"
 
-# # Remove an App ALB
-# - community.aws.elb_application_lb:
-#     name: "{{ web_alb.load_balancer_name }}"
-#     state: absent
-
-- name: Destroy a target group with Instance IDs
+# Remove an Web ALB TG
+- name: Destroy a Web target group with Instance IDs
   community.aws.elb_target_group:
-    name: "{{ web_elb_tg_name }}"
-    protocol: http
-    port: 80
-    vpc_id: "{{ vpc.vpc.id }}"
-    targets:
-      - Id: "{{ web_instance_1.instances[0].instance_id }}"
-        Port: 80
-      - Id: "{{ web_instance_2.instances[0].instance_id }}"
-        Port: 80
+    name: "Ansible-{{ deploy_environment }}-Web-TG"
     state: absent
+    region: "{{ region }}"
+    wait_timeout: 200
+
+# Remove an App ALB TG
+- name: Destroy a App target group with Instance IDs
+  community.aws.elb_target_group:
+    name: "Ansible-{{ deploy_environment }}-App-TG"
+    state: absent
+    region: "{{ region }}"
     wait_timeout: 200

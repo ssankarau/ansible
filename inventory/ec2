@@ -6,7 +6,7 @@
 
 [db_servers]
 
-[web_b]
+[web_lb]
 
 [application_lb]
 

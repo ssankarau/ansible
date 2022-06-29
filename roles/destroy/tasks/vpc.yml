@@ -1,7 +1,6 @@
 - name: DELETE THE VPC
   ec2_vpc_net:   
-    name: "{{ vpc_name }}"
-    cidr_block: "{{ vpc_cidr }}"
+    name: "Ansible-{{ deploy_environment }}-VPC"
     region: "{{ region }}"
     state: absent  
     purge_cidrs: yes  

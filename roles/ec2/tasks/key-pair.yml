@@ -5,5 +5,5 @@
   register: bastion_key
  
 - name: Save Bastion private key to local
-  copy: content="{{ bastion_key.key.private_key }}" dest="./{{ deploy_environment }}-private-key.pem" mode=0600
+  copy: content="{{ bastion_key.key.private_key }}" dest="./keys/{{ deploy_environment }}-private-key.pem" mode=0600
   when: bastion_key.changed

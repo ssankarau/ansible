@@ -8,6 +8,7 @@
 
 - name: Gather information about VPC route table
   amazon.aws.ec2_vpc_route_table_info:
+    region: "{{ region }}"
     filters:
       vpc-id: "{{ vpc_info.vpcs[0].vpc_id }}"
       "tag:environ": "{{ deploy_environment }}"
@@ -34,6 +35,7 @@
   
 - name: Gather Info about Subnet
   amazon.aws.ec2_vpc_subnet_info:
+    region: "{{ region }}"
     filters:
       vpc-id: "{{ vpc_info.vpcs[0].vpc_id }}"
   register: subnet_info

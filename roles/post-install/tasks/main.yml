@@ -1,9 +1,4 @@
 ---
-- name: Refresh Dynamic Inventory file
-  meta: refresh_inventory
-
-- pause:
-    seconds: 30
 
 - name: copy private key to the bastion host
   copy:

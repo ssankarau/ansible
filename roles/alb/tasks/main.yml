@@ -10,3 +10,7 @@
 
 - name: Create App ALB 
   import_tasks: app-alb.yml
+
+- meta: refresh_inventory
+- pause:
+    seconds: 30

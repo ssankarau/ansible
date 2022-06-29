@@ -1,0 +1,53 @@
+- name: Grab SG details
+  amazon.aws.ec2_group_info:
+    region: "{{ region }}"
+    filters:
+      "tag:environ": "{{ deploy_environment }}"
+      "tag:controlled_by": "ansible"
+  register: sg_info
+
+- debug:
+    var: sg_info
+
+- name: Delete DB Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-DB-SG"
+    state: absent
+
+- name: Delete App Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-APP-SG"
+    state: absent
+
+- name: Delete App ELB Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-APP-ELB-SG"
+    state: absent
+
+- name: Delete Web Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-WEB-SG"
+    state: absent
+
+- name: Delete Web Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-WEB-ELB-SG"
+    state: absent
+
+- name: Delete Web Security Group
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    name: "Ansible-{{ deploy_environment }}-Bastion-SG"
+    state: absent
+
+# - name: Delete Security Groups
+#   amazon.aws.ec2_group:
+#     region: "{{ region }}"
+#     group_id: "{{ item.group_id }}"
+#     state: absent
+#   loop: "{{ sg_info.security_groups }}"

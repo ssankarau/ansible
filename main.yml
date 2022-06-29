@@ -7,8 +7,8 @@
     - rds
     - ec2
     - alb
-    # - cdn
-    # - test
+#     # - cdn
+#     # - test
 - name: Post Infra Setup - 
   hosts: bastion_hosts
   roles:

@@ -12,4 +12,6 @@
         rule_desc: allow all on port 22
     tags:
       Name: "{{ bastion_sg_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: bastion_sg

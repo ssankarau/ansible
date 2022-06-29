@@ -18,4 +18,6 @@
 
     tags:
       Name: "{{ app_sg_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: app_sg

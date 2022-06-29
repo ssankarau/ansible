@@ -15,6 +15,10 @@
           - Type: forward
             TargetGroupName: "{{ web_elb_tg_name }}"
     state: present
+    tags:
+      Name: "{{ web_elb_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: web_alb
 
 - name: Set Fact Web ALB
@@ -23,6 +27,6 @@
 
 - name: Add the Web LB to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[web_lb\]' 
     line: "{{ web_lb }}"

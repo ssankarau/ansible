@@ -10,8 +10,10 @@
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"
     tags:
-      Environment: "{{ deploy_environment }}"
+      Name: "{{ deploy_environment }}-App-Instance-1"
       Group: AppTier
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: app_instance_1
 
 - name: App Instance on Private Subnet 2
@@ -26,18 +28,20 @@
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"
     tags:
-      Environment: "{{ deploy_environment }}"
+      Name: "{{ deploy_environment }}-App-Instance-2"
       Group: AppTier
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: app_instance_2
 
 - name: Add the App Server EC2 instance to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[app_servers\]' 
     line: "{{ app_instance_1.instances[0].private_ip_address}}"
 
 - name: Add the App EC2 instance to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[app_servers\]' 
     line: "{{ app_instance_2.instances[0].private_ip_address}}"

@@ -4,3 +4,9 @@
     state: absent
     region: "{{ region }}"
     skip_final_snapshot: True
+
+- name: remove the DB Subnet Group 
+  community.aws.rds_subnet_group:
+    name: ansible-{{ deploy_environment }}-db-subnet-group
+    state: absent
+    region: "{{ region }}"

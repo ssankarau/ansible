@@ -13,6 +13,10 @@
     stickiness_enabled: yes
     stickiness_type: lb_cookie
     state: present
+    tags:
+      Name: "{{ app_elb_tg_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
     wait_timeout: 200
   register: app_alb_tg
 

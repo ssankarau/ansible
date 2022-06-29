@@ -1,7 +1,0 @@
----
-- name: Post Installation
-  hosts: bastion_hosts
-  tasks: 
-  - name: print the variable 
-    debug: 
-      msg: "hello"

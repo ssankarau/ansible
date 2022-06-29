@@ -1,3 +1,5 @@
+- include_vars: "{{ deploy_environment }}.yml"
+
 - name: VPC Creation
   import_tasks:  vpc.yml
 

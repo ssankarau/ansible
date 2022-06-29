@@ -15,13 +15,17 @@
     engine: "mariadb"
     engine_version: "10.6.7"
     master_user_password: "{{ db_password }}"
-    master_username: "ansible_{{ deploy_environment }}_user"
+    master_username: "ansible{{ deploy_environment }}user"
     port: "3306"
     region: "{{ region }}"
     state: "running"
     storage_type: "standard"
     vpc_security_group_ids: 
       - "{{ db_sg.group_id }}"
+    tags:
+      Name: "ansible-{{ deploy_environment }}-db"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: rds_db
 
 - name: Set Fact RDS Instance EndPoint
@@ -30,6 +34,6 @@
 
 - name: Add the App EC2 instance to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[db_servers\]' 
     line: "{{ rds_db.endpoint.address }}"

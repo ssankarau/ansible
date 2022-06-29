@@ -11,5 +11,9 @@
       - Id: "{{ web_instance_2.instances[0].instance_id }}"
         Port: 80
     state: present
+    tags:
+      Name: "{{ web_elb_tg_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
     wait_timeout: 200
 

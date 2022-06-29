@@ -1,6 +1,7 @@
 ---
-- name: Destroy RDS
-  import_tasks: rds.yml
+
+- name: Destroy ALB
+  import_tasks: alb.yml
 - pause:
     seconds: 10
 
@@ -9,10 +10,13 @@
 - pause:
     seconds: 10
 
-- name: Destroy ALB
-  import_tasks: alb.yml
+- name: Destroy RDS
+  import_tasks: rds.yml
 - pause:
     seconds: 10
+
+- name: Destroy SG
+  import_tasks: sg.yml
 
 - name: Destroy VPC
   import_tasks: vpc.yml

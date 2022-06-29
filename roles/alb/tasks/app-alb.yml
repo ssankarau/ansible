@@ -15,6 +15,10 @@
           - Type: forward
             TargetGroupName: "{{ app_elb_tg_name }}"
     state: present
+    tags:
+      Name: "{{ app_elb_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: app_alb
 
 - name: Set Fact App ALB
@@ -23,6 +27,6 @@
 
 - name: Add the Application LB to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[application_lb\]' 
     line: "{{ application_lb }}"

@@ -1,5 +1,5 @@
-# Remove an App ALB
-- community.aws.elb_application_lb:
+- name: Remove an App ALB
+  community.aws.elb_application_lb:
     name: "ansible-{{ deploy_environment }}-app-elb"
     state: absent
     region: "{{ region }}"

@@ -9,8 +9,10 @@
     region: "{{ region }}"
     state: running
     tags:
-      Environment: "{{ deploy_environment }}"
+      Name: "{{ deploy_environment }}-Web-Instance-1"
       Group: WebTier
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
     # user_data: "{{ lookup('file', 'web_user_data.sh') }}"
   register: web_instance_1
 
@@ -25,20 +27,22 @@
     region: "{{ region }}"
     state: running
     tags:
-      Environment: "{{ deploy_environment }}"
+      Name: "{{ deploy_environment }}-Web-Instance-2"
       Group: WebTier
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
     # user_data: "{{ lookup('file', 'web_user_data.sh') }}"
   register: web_instance_2
 
 - name: Add the Web Server EC2 instance to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[web_servers\]' 
     line: "{{ web_instance_1.instances[0].private_ip_address}}"
 
 - name: Add the Bastion EC2 instance to Dynamic Inventory
   lineinfile: 
-    path: "inventory/ec2"
+    path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[web_servers\]' 
     line: "{{ web_instance_2.instances[0].private_ip_address}}"
 

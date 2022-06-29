@@ -12,4 +12,6 @@
         rule_desc: allow all ports from web tier
     tags:
       Name: "{{ app_elb_sg_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: app_elb_sg

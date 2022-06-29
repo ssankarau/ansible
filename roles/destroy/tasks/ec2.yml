@@ -1,9 +1,17 @@
-- name: Terminate Ec2 instances that are part 
+- name: Grab EC2 details
+  amazon.aws.ec2_instance_info:
+    region: "{{ region }}"
+    filters:
+      "tag:environ": "{{ deploy_environment }}"
+      "tag:controlled_by": "ansible"
+  register: ec2_info
+- debug:
+    var: ec2_info
+
+- name: Delete EC2 Instances 
   amazon.aws.ec2_instance:
     region: "{{ region }}"
-    state: 'absent'
-    instance_ids: 
-    - "{{ groups['web_servers'] }}"
-    - "{{ groups['app_servers'] }}"
-    - "{{ groups['bastion_hosts'] }}"
+    state: absent
+    instance_ids: "{{ item.instance_id }}"
+  loop: "{{ ec2_info.instances }}"
 

@@ -1,0 +1,5 @@
+---
+- name: Ansible Play book for Destroy AWS Resources - Infra
+  hosts: localhost
+  roles:
+    - destroy

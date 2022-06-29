@@ -1,0 +1,8 @@
+---
+- name: create an S3 Bucket
+  amazon.aws.s3_bucket:
+    name: zymr-s3-bucket-test
+    state: present
+    public_access:
+        block_public_acls: true
+        ignore_public_acls: true

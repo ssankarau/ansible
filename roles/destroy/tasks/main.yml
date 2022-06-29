@@ -1,0 +1,12 @@
+---
+- name: Destroy RDS
+  import_tasks: rds.yml
+
+# - name: Destroy Ec2 Instances
+#   import_tasks: ec2.yml
+
+- name: Destroy ALB
+  import_tasks: alb.yml
+
+- name: Destroy VPC
+  import_tasks: vpc.yml

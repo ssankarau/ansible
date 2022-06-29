@@ -1,0 +1,16 @@
+---
+- name: Create Bastion Host Key Pair
+  import_tasks: key-pair.yml
+
+- name: Create Bastion Host on Public Subnets
+  import_tasks: bastion.yml
+
+- name: Create Web Tier Instances on Public Subnets
+  import_tasks: web-instance.yml
+
+- name: Create App Tier Instances on Public Subnets
+  import_tasks: app-instance.yml
+
+- meta: refresh_inventory
+- pause:
+    seconds: 30

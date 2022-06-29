@@ -1,0 +1,27 @@
+# App ALB and attach a listener
+- community.aws.elb_application_lb:
+    name: "{{ app_elb_name }}"
+    security_groups:
+      - "{{ app_elb_sg.group_id }}"
+    subnets:
+      - "{{ web_subnet_1.subnet.id }}"
+      - "{{ web_subnet_2.subnet.id }}"
+    scheme: internal
+    listeners:
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+          - Type: forward
+            TargetGroupName: "{{ app_elb_tg_name }}"
+    state: present
+  register: app_alb
+
+- name: Set Fact App ALB
+  set_fact:
+    application_lb: "{{ app_alb.dns_name }}"
+
+- name: Add the Application LB to Dynamic Inventory
+  lineinfile: 
+    path: "inventory/ec2"
+    insertafter: '^\[application_lb\]' 
+    line: "{{ application_lb }}"

@@ -1,0 +1,12 @@
+- name: Terminate instances that were previously launched
+  amazon.aws.ec2:
+    state: 'absent'
+    instance_ids: 
+    - "{{ bastion_instance_1.instances[0].instance_id }}"
+    # - "{{ public_instance_1.instances[1].instance_id }}"
+    - "{{ web_instance_1.instances[0].instance_id }}"
+    - "{{ web_instance_1.instances[1].instance_id }}"
+    - "{{ app_instance_1.instances[0].instance_id }}"
+    - "{{ app_instance_1.instances[1].instance_id }}"
+    # - "{{ db_instance_1.instances[0].instance_id }}"
+    # - "{{ db_instance_1.instances[1].instance_id }}"

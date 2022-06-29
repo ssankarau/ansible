@@ -1,0 +1,9 @@
+---
+bastion_ami: ami-0cff7528ff583bf9a # Amazon Linux 2 
+bastion_instance_type: t2.micro
+
+web_ami: ami-0f41b7ab72c184031 # Amazon Linux 2 With NGINX Enabled
+web_instance_type: t2.micro
+
+app_ami: ami-06016c503e93e0757 # Amazon Linux 2 With PhpMyAdmin Enabled
+app_instance_type: t2.micro

@@ -1,0 +1,35 @@
+- include_vars:
+    file: secrets.yml
+
+- name: Create DB Subnet Group
+  import_tasks:  db_subnet_group.yml
+
+- name: create RDS instance
+  community.aws.rds_instance:
+    allocated_storage: 20
+    # availability_zone: "us-east-1e"
+    db_instance_class: "{{ db_instance_type }}"
+    db_instance_identifier: "ansible-{{ deploy_environment }}-db"
+    db_name: "ansible{{ deploy_environment }}db"
+    db_subnet_group_name: "{{ db_subnet_group.subnet_group.name }}"
+    engine: "mariadb"
+    engine_version: "10.6.7"
+    master_user_password: "{{ db_password }}"
+    master_username: "ansible_{{ deploy_environment }}_user"
+    port: "3306"
+    region: "{{ region }}"
+    state: "running"
+    storage_type: "standard"
+    vpc_security_group_ids: 
+      - "{{ db_sg.group_id }}"
+  register: rds_db
+
+- name: Set Fact RDS Instance EndPoint
+  set_fact:
+    rds_db_endpoint: "{{ rds_db.endpoint.address }}"
+
+- name: Add the App EC2 instance to Dynamic Inventory
+  lineinfile: 
+    path: "inventory/ec2"
+    insertafter: '^\[db_servers\]' 
+    line: "{{ rds_db.endpoint.address }}"

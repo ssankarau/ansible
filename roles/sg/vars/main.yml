@@ -1,0 +1,8 @@
+---
+vpc_id: "{{ vpc.vpc.id | default('vpc-01bc2e967458b9178') }}"
+bastion_sg_name: "Ansible-{{ deploy_environment }}-Bastion-SG"
+web_elb_sg_name: "Ansible-{{ deploy_environment }}-WEB-ELB-SG"
+web_sg_name: "Ansible-{{ deploy_environment }}-WEB-SG"
+app_elb_sg_name: "Ansible-{{ deploy_environment }}-APP-ELB-SG"
+app_sg_name: "Ansible-{{ deploy_environment }}-APP-SG"
+db_sg_name: "Ansible-{{ deploy_environment }}-DB-SG"

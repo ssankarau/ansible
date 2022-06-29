@@ -1,0 +1,17 @@
+- name: Create application target group with Instance IDs
+  community.aws.elb_target_group:
+    name: "{{ app_elb_tg_name }}"
+    protocol: http
+    port: 80
+    vpc_id: "{{ vpc.vpc.id }}"
+    targets:
+      - Id: "{{ app_instance_1.instances[0].instance_id }}"
+        Port: 80
+      - Id: "{{ app_instance_2.instances[0].instance_id }}"
+        Port: 80
+    stickiness_enabled: yes
+    stickiness_type: lb_cookie
+    state: present
+    wait_timeout: 200
+  register: app_alb_tg
+

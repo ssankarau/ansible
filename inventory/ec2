@@ -1,0 +1,12 @@
+[bastion_hosts]
+
+[web_servers]
+
+[app_servers]
+
+[db_servers]
+
+[web_b]
+
+[application_lb]
+

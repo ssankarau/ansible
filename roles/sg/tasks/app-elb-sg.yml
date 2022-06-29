@@ -1,0 +1,15 @@
+- name: Security Group Configuration for App Elastic Load Balancer
+  amazon.aws.ec2_group:
+    name: "{{ app_elb_sg_name }}"
+    description: Ansible Security Group for App Elastic Load Balancer Allowing all ports from Web Tier SG
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        ports:
+        - 0-65535
+        group_name: "{{ web_sg.group_name }}"
+        rule_desc: allow all ports from web tier
+    tags:
+      Name: "{{ app_elb_sg_name }}"
+  register: app_elb_sg

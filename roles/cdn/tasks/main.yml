@@ -1,0 +1,11 @@
+---
+- name: create a CDN
+  community.aws.cloudfront_distribution:
+    state: present
+    default_origin_domain_name: "{{ web_alb.dns_name }}"
+    tags:
+      Name: "{{ deploy_environment }}-Cloud-front"
+      distribution_id: "{{ deploy_environment }}-Cloud-front"
+      # Project: {{ project_name }}
+      # Priority: '1'
+  register: web_alb_cdn

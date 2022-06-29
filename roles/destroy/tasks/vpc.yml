@@ -1,0 +1,9 @@
+- name: DELETE THE VPC
+  ec2_vpc_net:   
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_cidr }}"
+    region: "{{ region }}"
+    state: absent  
+    purge_cidrs: yes  
+  register: vpc_delete
+

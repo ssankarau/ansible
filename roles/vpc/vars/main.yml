@@ -1,0 +1,44 @@
+---
+region: "{{ region }}"
+deploy_environment: "{{ deploy_environment }}"
+availability_zones:
+  - "{{region}}a"
+  - "{{region}}b"
+ 
+# VPC
+vpc_cidr: 10.0.0.0/16
+vpc_name: "Ansible-{{ deploy_environment }}-VPC"
+ 
+# Bastion Subnet 1
+bastion_subnet_name_1: "Ansible-{{ deploy_environment }}-Public-Subnet-1"
+bastion_subnet_cidr_1: 10.0.1.0/24
+# Bastion Subnet 2
+bastion_subnet_name_2: "Ansible-{{ deploy_environment }}-Public-Subnet-2"
+bastion_subnet_cidr_2: 10.0.2.0/24
+
+# Internet Gateway Name
+igw_name: "Ansible-{{ deploy_environment }}-Internet-Gateway"
+
+# Web Private Subnet 1
+web_subnet_name_1: "Ansible-{{ deploy_environment }}-Web-Private-Subnet-1"
+web_subnet_cidr_1: 10.0.3.0/24
+# Web Private Subnet 2
+web_subnet_name_2: "Ansible-{{ deploy_environment }}-Web-Private-Subnet-2"
+web_subnet_cidr_2: 10.0.4.0/24
+
+# App Private Subnet 1
+app_subnet_name_1: "Ansible-{{ deploy_environment }}-App-Private-Subnet-1"
+app_subnet_cidr_1: 10.0.5.0/24
+# App Private Subnet 2
+app_subnet_name_2: "Ansible-{{ deploy_environment }}-App-Private-Subnet-2"
+app_subnet_cidr_2: 10.0.6.0/24
+
+# DB Private Subnet 1
+db_subnet_name_1: "Ansible-{{ deploy_environment }}-DB-Private-Subnet-1"
+db_subnet_cidr_1: 10.0.7.0/24
+
+# DB Private Subnet 2
+db_subnet_name_2: "Ansible-{{ deploy_environment }}-DB-Private-Subnet-2"
+db_subnet_cidr_2: 10.0.8.0/24
+
+  

@@ -1,0 +1,89 @@
+- name: Public Bastion Subnet VPC AZ1
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   cidr: "{{ bastion_subnet_cidr_1 }}"
+   az: "{{ region }}a"
+   map_public: yes
+   resource_tags:
+     Name: "{{ bastion_subnet_name_1 }}"
+  register: public_subnet_1
+ 
+- name: Public Bastion Subnet VPC AZ2
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   cidr: "{{ bastion_subnet_cidr_2 }}"
+   az: "{{ region }}b"
+   map_public: yes
+   resource_tags:
+     Name: "{{ bastion_subnet_name_2 }}"
+  register: public_subnet_2
+
+- name: Web Private Subnet AZ-1
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}a"
+   cidr: "{{ web_subnet_cidr_1 }}"
+   resource_tags:
+     Name: "{{ web_subnet_name_1 }}"
+  register: web_subnet_1
+
+- name: Web Private Subnet AZ-2
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}b"
+   cidr: "{{ web_subnet_cidr_2 }}"
+   resource_tags:
+     Name: "{{ web_subnet_name_2 }}"
+  register: web_subnet_2
+
+- name: App Private Subnet AZ-1
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}a"
+   cidr: "{{ app_subnet_cidr_1 }}"
+   resource_tags:
+     Name: "{{ app_subnet_name_1 }}"
+  register: app_subnet_1
+
+- name: App Private Subnet AZ-2
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}b"
+   cidr: "{{ app_subnet_cidr_2 }}"
+   resource_tags:
+     Name: "{{ app_subnet_name_2 }}"
+  register: app_subnet_2
+
+- name: DB Private Subnet AZ-1
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}a"
+   cidr: "{{ db_subnet_cidr_1 }}"
+   resource_tags:
+     Name: "{{ db_subnet_name_1 }}"
+  register: db_subnet_1
+
+- name: DB Private Subnet AZ-2
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc.vpc.id }}"
+   region: "{{ region }}"
+   az: "{{ region }}b"
+   cidr: "{{ db_subnet_cidr_2 }}"
+   resource_tags:
+     Name: "{{ db_subnet_name_2 }}"
+  register: db_subnet_2

@@ -1,0 +1,12 @@
+- name: VPC Creation
+  import_tasks:  vpc.yml
+
+- name: Subnet Creation
+  import_tasks:  subnet.yml
+
+- name: IGW Creation
+  import_tasks:  igw.yml
+
+- name: Route Table Creation
+  import_tasks:  route_table.yml
+

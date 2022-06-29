@@ -1,0 +1,20 @@
+- name: Security Group Configuration for DB Tier
+  amazon.aws.ec2_group:
+    name: "{{ db_sg_name }}"
+    description: Ansible Security Group for DB Tier Allowing All Ports from App SG
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        ports:
+        - 3306
+        group_name: "{{ app_sg.group_name }}"
+        rule_desc: allow all ports from app security group
+      - proto: tcp
+        ports:
+        - 22
+        group_name: "{{ bastion_sg.group_name }}"
+        rule_desc: allow SSH From Bastion Host
+    tags:
+      Name: "{{ db_sg_name }}"
+  register: db_sg

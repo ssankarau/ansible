@@ -1,0 +1,12 @@
+---
+- name: Create Web ALB Target Groups
+  import_tasks: web-alb-target-group.yml
+
+- name: Create Web ALB 
+  import_tasks: web-alb.yml
+
+- name: Create App ALB Target Groups
+  import_tasks: app-alb-target-group.yml
+
+- name: Create App ALB 
+  import_tasks: app-alb.yml

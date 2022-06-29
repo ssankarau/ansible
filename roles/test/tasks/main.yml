@@ -1,0 +1,8 @@
+- include_vars:
+    file: secrets.yml
+- name: print the variable 
+  debug: 
+    var: db_password
+- name: print the regular variable 
+  debug: 
+    var: db_instance_type

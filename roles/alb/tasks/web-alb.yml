@@ -1,0 +1,27 @@
+# Web ALB and attach a listener
+- community.aws.elb_application_lb:
+    name: "{{ web_elb_name }}"
+    security_groups:
+      - "{{ web_elb_sg.group_id }}"
+    subnets:
+      - "{{ public_subnet_1.subnet.id }}"
+      - "{{ public_subnet_2.subnet.id }}"
+    scheme: internet-facing
+    listeners:
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+          - Type: forward
+            TargetGroupName: "{{ web_elb_tg_name }}"
+    state: present
+  register: web_alb
+
+- name: Set Fact Web ALB
+  set_fact:
+    web_lb: "{{ web_alb.dns_name }}"
+
+- name: Add the Web LB to Dynamic Inventory
+  lineinfile: 
+    path: "inventory/ec2"
+    insertafter: '^\[web_lb\]' 
+    line: "{{ web_lb }}"

@@ -1,0 +1,9 @@
+- name: show me an encrypted var 
+  hosts: localhost 
+  gather_facts: false 
+  vars_files: 
+    - secrets.yml 
+  tasks: 
+  - name: print the variable 
+    debug: 
+      var: db_password

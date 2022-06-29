@@ -1,0 +1,15 @@
+- name: Security Group Configuration for Web Elastic Load Balancer
+  amazon.aws.ec2_group:
+    name: "{{ web_elb_sg_name }}"
+    description: Ansible Security Group for Web Elastic Load Balancer Allowing HTTP Port
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        ports:
+        - 80
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port 80
+    tags:
+      Name: "{{ web_elb_sg_name }}"
+  register: web_elb_sg

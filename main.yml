@@ -1,0 +1,15 @@
+---
+- name: Ansible Play book for AWS Resources - Infra
+  hosts: local
+  roles:
+    - vpc
+    - sg
+    - rds
+    - ec2
+    - alb
+    # - cdn
+    # - test
+- name: Post Infra Setup - 
+  hosts: bastion_hosts
+  roles:
+    - post-install

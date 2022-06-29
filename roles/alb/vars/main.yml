@@ -1,0 +1,5 @@
+---
+web_elb_tg_name: "Ansible-{{ deploy_environment }}-Web-TG"
+web_elb_name: "ansible-{{ deploy_environment }}-web-elb"
+app_elb_tg_name: "Ansible-{{ deploy_environment }}-App-TG"
+app_elb_name: "ansible-{{ deploy_environment }}-app-elb"

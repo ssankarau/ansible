@@ -1,0 +1,5 @@
+- name: remove the DB instance without a final snapshot
+  community.aws.rds_instance:
+    id: "ansible-{{ deploy_environment }}-db"
+    state: absent
+    skip_final_snapshot: True

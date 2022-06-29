@@ -1,0 +1,17 @@
+- name: Bastion SG Configuration
+  import_tasks:  bastion-sg.yml
+
+- name: Web ELB SG Configuration
+  import_tasks:  web-elb-sg.yml
+
+- name: Web SG Configuration
+  import_tasks:  web-sg.yml
+
+- name: App ELB SG Configuration
+  import_tasks:  app-elb-sg.yml
+
+- name: App SG Configuration
+  import_tasks:  app-sg.yml
+
+- name: DB SG Configuration
+  import_tasks:  db-sg.yml

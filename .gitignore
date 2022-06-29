@@ -1,0 +1,4 @@
+*.pem
+.vault-password
+.profile
+requirements.txt

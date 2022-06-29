@@ -1,8 +1,56 @@
+- name: Grab VPC details
+  amazon.aws.ec2_vpc_net_info:
+    region: "{{ region }}"
+    filters:
+      "tag:environ": "{{ deploy_environment }}"
+      "tag:controlled_by": "ansible"
+  register: vpc_info
+
+- name: Gather information about VPC route table
+  amazon.aws.ec2_vpc_route_table_info:
+    filters:
+      vpc-id: "{{ vpc_info.vpcs[0].vpc_id }}"
+      "tag:environ": "{{ deploy_environment }}"
+      "tag:controlled_by": "ansible"
+  register: route_table_info
+
+
+- name: Delete Route Table
+  community.aws.ec2_vpc_route_table:
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_info.vpcs[0].vpc_id }}"
+    route_table_id: "{{ item.id }}"
+    lookup: id
+    state: absent
+  loop: '{{ route_table_info.route_tables }}'
+
+- name: Delete internet gateway
+  community.aws.ec2_vpc_igw:
+    region: "{{ region }}"
+    vpc_id: "{{ item.vpc_id }}"
+    state: absent
+  loop: '{{ vpc_info.vpcs }}'
+
+  
+- name: Gather Info about Subnet
+  amazon.aws.ec2_vpc_subnet_info:
+    filters:
+      vpc-id: "{{ vpc_info.vpcs[0].vpc_id }}"
+  register: subnet_info
+
+- name: Delete Subnet
+  amazon.aws.ec2_vpc_subnet:
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_info.vpcs[0].vpc_id }}"
+    cidr: "{{ item.cidr_block }}"
+    state: absent
+  loop: '{{ subnet_info.subnets }}'
+
 - name: DELETE THE VPC
   ec2_vpc_net:   
-    name: "Ansible-{{ deploy_environment }}-VPC"
     region: "{{ region }}"
+    name: "{{ vpc_info.vpcs[0].tags.Name }}"
+    cidr_block: "{{ vpc_info.vpcs[0].cidr_block }}"
     state: absent  
     purge_cidrs: yes  
   register: vpc_delete
-

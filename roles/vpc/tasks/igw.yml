@@ -1,8 +1,10 @@
 - name: create IGW
   ec2_vpc_igw:
-   vpc_id: "{{ vpc.vpc.id }}"
-   region: "{{ region }}"
-   state: "present"
-   tags:
-     Name: "{{ igw_name }}"
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ region }}"
+    state: "present"
+    tags:
+      Name: "{{ igw_name }}"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
   register: igw

@@ -7,7 +7,9 @@
    az: "{{ region }}a"
    map_public: yes
    resource_tags:
-     Name: "{{ bastion_subnet_name_1 }}"
+    Name: "{{ bastion_subnet_name_1 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: public_subnet_1
  
 - name: Public Bastion Subnet VPC AZ2
@@ -19,7 +21,9 @@
    az: "{{ region }}b"
    map_public: yes
    resource_tags:
-     Name: "{{ bastion_subnet_name_2 }}"
+    Name: "{{ bastion_subnet_name_1 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: public_subnet_2
 
 - name: Web Private Subnet AZ-1
@@ -30,7 +34,9 @@
    az: "{{ region }}a"
    cidr: "{{ web_subnet_cidr_1 }}"
    resource_tags:
-     Name: "{{ web_subnet_name_1 }}"
+    Name: "{{ web_subnet_name_1 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: web_subnet_1
 
 - name: Web Private Subnet AZ-2
@@ -41,7 +47,9 @@
    az: "{{ region }}b"
    cidr: "{{ web_subnet_cidr_2 }}"
    resource_tags:
-     Name: "{{ web_subnet_name_2 }}"
+    Name: "{{ web_subnet_name_2 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: web_subnet_2
 
 - name: App Private Subnet AZ-1
@@ -52,7 +60,9 @@
    az: "{{ region }}a"
    cidr: "{{ app_subnet_cidr_1 }}"
    resource_tags:
-     Name: "{{ app_subnet_name_1 }}"
+    Name: "{{ app_subnet_name_1 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: app_subnet_1
 
 - name: App Private Subnet AZ-2
@@ -63,7 +73,9 @@
    az: "{{ region }}b"
    cidr: "{{ app_subnet_cidr_2 }}"
    resource_tags:
-     Name: "{{ app_subnet_name_2 }}"
+    Name: "{{ app_subnet_name_2 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: app_subnet_2
 
 - name: DB Private Subnet AZ-1
@@ -74,7 +86,9 @@
    az: "{{ region }}a"
    cidr: "{{ db_subnet_cidr_1 }}"
    resource_tags:
-     Name: "{{ db_subnet_name_1 }}"
+    Name: "{{ db_subnet_name_1 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: db_subnet_1
 
 - name: DB Private Subnet AZ-2
@@ -85,5 +99,7 @@
    az: "{{ region }}b"
    cidr: "{{ db_subnet_cidr_2 }}"
    resource_tags:
-     Name: "{{ db_subnet_name_2 }}"
+    Name: "{{ db_subnet_name_2 }}"
+    environ: "{{ deploy_environment }}"
+    controlled_by: ansible
   register: db_subnet_2

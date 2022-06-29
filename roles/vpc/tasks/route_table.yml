@@ -10,6 +10,8 @@
         gateway_id: "{{ igw.gateway_id  }}"
     tags:
       Name: "Ansbile {{ deploy_environment }} Public Subent Route Table"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
 
 - name: Private Subnet Route Configuration Zone 1
   ec2_vpc_route_table:
@@ -21,6 +23,8 @@
       - "{{ db_subnet_1.subnet.id }}"
     tags:
       Name: "Ansbile {{ deploy_environment }} Private Subent Route Table Z1"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible
 
 - name: Private Subnet Route Configuration Zone 2
   ec2_vpc_route_table:
@@ -32,3 +36,5 @@
       - "{{ db_subnet_2.subnet.id }}"
     tags:
       Name: "Ansbile {{ deploy_environment }} Private Subent Route Table Z2"
+      environ: "{{ deploy_environment }}"
+      controlled_by: ansible

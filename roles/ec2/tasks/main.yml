@@ -10,7 +10,3 @@
 
 - name: Create App Tier Instances on Public Subnets
   import_tasks: app-instance.yml
-
-- meta: refresh_inventory
-- pause:
-    seconds: 30

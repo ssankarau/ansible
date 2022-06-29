@@ -1,4 +1,9 @@
 ---
+- name: Refresh Dynamic Inventory file
+  meta: refresh_inventory
+
+- pause:
+    seconds: 30
 
 - name: copy private key to the bastion host
   copy:
@@ -10,10 +15,8 @@
   shell: |
     ssh -i ~/.ssh/{{ deploy_environment }}-private-key.pem -o StrictHostKeyChecking=no ec2-user@{{ item }} << EOF
       ls -la;
-      # sudo cp /var/www/html/phpMyAdmin/config.sample.inc.php /var/www/html/phpMyAdmin/config.inc.php
-      # sed -i "s/$cfg['Servers'][$i]['host'] =.*/$cfg['Servers'][$i]['host'] = ${rds_db_endpoint}/g" /var/www/html/phpMyAdmin/config.inc.php; 
       sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup;
-      sudo sed -i "s|proxy_pass .*| proxy_pass http://{{ groups['application_lb'][0] }};|g" /etc/nginx/nginx.conf;
+      sudo sed -i "s|proxy_pass .*| proxy_pass http://{{ groups['application_lb'] | first }};|g" /etc/nginx/nginx.conf;
       sudo systemctl restart nginx;
     EOF
   with_items:

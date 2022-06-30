@@ -5,7 +5,7 @@
     instance_type: "{{ app_instance_type }}"
     key_name: "{{ deploy_environment }}-private-key"
     security_group: "{{ app_sg.group_id }}"
-    image_id: "{{ app_ami }}"
+    image_id: "app_ami_{{ region | replace('-','_') }}"
     region: "{{ region }}"
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"
@@ -23,7 +23,7 @@
     key_name: "{{ deploy_environment }}-private-key"
     instance_type: "{{ app_instance_type }}"
     security_group: "{{ app_sg.group_id }}"
-    image_id: "{{ app_ami }}"
+    image_id: "{{ vars['app_ami_' ~ region_with_underscore] }}"
     region: "{{ region }}"
     state: running
     user_data: "{{ lookup('file', 'web_user_data.sh') }}"

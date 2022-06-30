@@ -7,3 +7,5 @@ web_instance_type: t2.micro
 
 app_ami: ami-06016c503e93e0757 # Amazon Linux 2 With PhpMyAdmin Enabled
 app_instance_type: t2.micro
+
+region_with_underscore: "{{ region | replace('-','_') }}"

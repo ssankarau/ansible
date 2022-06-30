@@ -23,7 +23,7 @@
     vpc_subnet_id: "{{ web_subnet_2.subnet.id }}"
     instance_type: "{{ web_instance_type }}"
     security_group: "{{ web_sg.group_id }}"
-    image_id: "web_ami_{{ region | replace('-','_') }}"
+    image_id: "{{ vars['app_ami_' ~ region_with_underscore] }}"
     region: "{{ region }}"
     state: running
     tags:

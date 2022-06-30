@@ -2,10 +2,10 @@
 127.0.0.1 ansible_connection=local
 
 [all:vars]
-bastion_ami_us_east_1: ami-0cff7528ff583bf9a # Amazon Linux 2 
-web_ami_us_east_1: ami-0f41b7ab72c184031 # Amazon Linux 2 With NGINX Enabled
-app_ami_us_east_1: ami-06016c503e93e0757 # Amazon Linux 2 With PhpMyAdmin Enabled
+bastion_ami_us_east_1="ami-0cff7528ff583bf9a" # Amazon Linux 2 
+web_ami_us_east_1="ami-0f41b7ab72c184031" # Amazon Linux 2 With NGINX Enabled
+app_ami_us_east_1="ami-06016c503e93e0757" # Amazon Linux 2 With PhpMyAdmin Enabled
 
-bastion_ami_ap_south_1: ami-08df646e18b182346 # Amazon Linux 2 
-web_ami_ap_south_1: ami-0634630b30352400b # Amazon Linux 2 With NGINX Enabled
-app_ami_ap_south_1: ami-0af14e17c8c2bf77f # Amazon Linux 2 With PhpMyAdmin Enabled
+bastion_ami_ap_south_1="ami-08df646e18b182346" # Amazon Linux 2 
+web_ami_ap_south_1="ami-0634630b30352400b" # Amazon Linux 2 With NGINX Enabled
+app_ami_ap_south_1="ami-0af14e17c8c2bf77f" # Amazon Linux 2 With PhpMyAdmin Enabled

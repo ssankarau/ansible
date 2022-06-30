@@ -3,7 +3,7 @@
     name: "{{ deploy_environment }}-App-Instance-1"
     vpc_subnet_id: "{{ app_subnet_1.subnet.id }}"
     instance_type: "{{ app_instance_type }}"
-    key_name: "{{ deploy_environment }}-private-key"
+    key_name: "{{ deploy_environment }}-private-key-{{ region }}"
     security_group: "{{ app_sg.group_id }}"
     image_id: "{{ vars['app_ami_' ~ region_with_underscore] }}"
     region: "{{ region }}"
@@ -20,7 +20,7 @@
   amazon.aws.ec2_instance:
     name: "{{ deploy_environment }}-App-Instance-2"
     vpc_subnet_id: "{{ app_subnet_2.subnet.id }}"
-    key_name: "{{ deploy_environment }}-private-key"
+    key_name: "{{ deploy_environment }}-private-key-{{ region }}"
     instance_type: "{{ app_instance_type }}"
     security_group: "{{ app_sg.group_id }}"
     image_id: "{{ vars['app_ami_' ~ region_with_underscore] }}"

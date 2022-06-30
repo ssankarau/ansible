@@ -1,7 +1,7 @@
 - name: Web Instance on Private Subnet 1
   amazon.aws.ec2_instance:
     name: "{{ deploy_environment }}-Web-Instance-1"
-    key_name: "{{ deploy_environment }}-private-key"
+    key_name: "{{ deploy_environment }}-private-key-{{ region }}"
     vpc_subnet_id: "{{ web_subnet_1.subnet.id }}"
     instance_type: "{{ web_instance_type }}"
     security_group: "{{ web_sg.group_id }}"
@@ -19,7 +19,7 @@
 - name: Web Instance on Private Subnet 2
   amazon.aws.ec2_instance:
     name: "{{ deploy_environment }}-Web-Instance-2"
-    key_name: "{{ deploy_environment }}-private-key"
+    key_name: "{{ deploy_environment }}-private-key-{{ region }}"
     vpc_subnet_id: "{{ web_subnet_2.subnet.id }}"
     instance_type: "{{ web_instance_type }}"
     security_group: "{{ web_sg.group_id }}"

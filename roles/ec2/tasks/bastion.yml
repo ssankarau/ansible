@@ -1,7 +1,7 @@
 - name: Bastion Host On public Subnet 1
   amazon.aws.ec2_instance:
     name: "{{ deploy_environment }}-Bastion-Host-1"
-    key_name: "{{ deploy_environment }}-private-key"
+    key_name: "{{ deploy_environment }}-private-key-{{ region }}"
     vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
     instance_type: "{{ bastion_instance_type }}"
     security_group: "{{ bastion_sg.group_id }}"
@@ -23,12 +23,12 @@
   lineinfile: 
     path: "inventory/{{ deploy_environment }}-dynamic-inventory"
     insertafter: '^\[bastion_hosts\]' 
-    line: "{{ bastion_instance_1.instances[0].public_ip_address}} ansible_user=ec2-user ansible_ssh_private_key_file=keys/{{ deploy_environment }}-private-key.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'"
+    line: "{{ bastion_instance_1.instances[0].public_ip_address}} ansible_user=ec2-user ansible_ssh_private_key_file=keys/{{ deploy_environment }}-private-key-{{ region }}.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'"
 
 # - name: Bastion Host On public Subnet 2
 #   amazon.aws.ec2_instance:
 #     name: "{{ deploy_environment }}-Bastion-Host-2"
-#     key_name: "{{ deploy_environment }}-private-key"
+#     key_name: "{{ deploy_environment }}-private-key-{{ region }}"
 #     vpc_subnet_id: "{{ public_subnet_2.subnet.id }}"
 #     instance_type: "{{ bastion_instance_type }}"
 #     security_group: "{{ bastion_sg.group_id }}"
